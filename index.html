@@ -172,33 +172,49 @@
   .pricing-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:stretch; }
   .price-card{
     background:#fff; border:1px solid var(--line); border-radius:16px; padding:32px 28px; display:flex; flex-direction:column;
+    transition:transform .18s ease, box-shadow .18s ease;
   }
+  .price-card:hover{ transform:translateY(-3px); box-shadow:0 12px 28px rgba(22,38,74,0.10); }
   .price-card.featured{
-    border:2px solid var(--navy); position:relative;
+    border:2px solid var(--navy); position:relative; overflow:hidden;
     box-shadow:0 16px 40px rgba(22,38,74,0.16); transform:scale(1.03);
   }
+  .price-card.featured:hover{ transform:scale(1.03) translateY(-3px); }
+  .price-card.featured::before{
+    content:''; position:absolute; top:0; left:0; right:0; height:6px;
+    background:linear-gradient(90deg, var(--green), var(--navy));
+  }
   .featured-badge{
-    position:absolute; top:-13px; left:50%; transform:translateX(-50%);
+    position:absolute; top:14px; left:50%; transform:translateX(-50%);
     background:var(--navy); color:#fff; font-weight:800; font-size:11px;
     padding:6px 14px; border-radius:100px; letter-spacing:0.04em; white-space:nowrap;
   }
-  .plan-name{ font-family:'Fraunces',serif; font-weight:600; font-size:19px; margin-bottom:4px; }
+  .price-card.featured{ padding-top:56px; }
+  .plan-icon{
+    width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center;
+    margin-bottom:12px; background:var(--bg-soft);
+  }
+  .price-card.featured .plan-icon{ background:#EAF4EC; }
+  .plan-name{ font-family:'Fraunces',serif; font-weight:600; font-size:20px; margin-bottom:4px; }
   .plan-desc{ font-size:13px; color:var(--muted); margin-bottom:20px; }
-  .plan-list{ list-style:none; display:flex; flex-direction:column; gap:9px; margin-bottom:22px; flex:1; }
-  .plan-list li{ display:flex; gap:9px; font-size:13.5px; align-items:flex-start; }
+  .plan-list{ list-style:none; display:flex; flex-direction:column; gap:11px; margin-bottom:22px; flex:1; }
+  .plan-list li{ display:flex; gap:10px; font-size:13.5px; align-items:flex-start; line-height:1.4; }
   .plan-list li.plan-highlight{ font-weight:700; color:var(--green-dark); }
+  .plan-list li.plan-off{ color:#A3ABB8; }
+  .plan-check{ flex-shrink:0; margin-top:1px; }
   .plan-price-row{ margin-bottom:6px; }
   .plan-old{ text-decoration:line-through; color:#9AA3AF; font-size:13px; }
-  .plan-price{ font-family:'Fraunces',serif; font-weight:700; font-size:34px; color:var(--navy); }
+  .plan-price{ font-family:'Fraunces',serif; font-weight:700; font-size:36px; color:var(--navy); }
   .plan-price span{ font-size:15px; font-weight:600; }
   .plan-savings{
     display:inline-block; background:#EAF4EC; color:var(--green-dark); font-weight:800; font-size:11.5px;
     padding:4px 10px; border-radius:100px; margin-bottom:16px;
   }
   .plan-cta{
-    width:100%; padding:14px; border-radius:10px; border:none; font-weight:800; font-size:14.5px;
+    width:100%; padding:15px; border-radius:10px; border:none; font-weight:800; font-size:14.5px;
     cursor:pointer; font-family:'Public Sans',sans-serif; background:var(--green); color:#fff;
-    transition:background .15s ease, transform .15s ease;
+    transition:background .15s ease, transform .15s ease; text-align:center; text-decoration:none;
+    display:block; box-sizing:border-box;
   }
   .plan-cta:hover{ background:var(--green-dark); transform:translateY(-1px); }
   .plan-cta.ghost{ background:#fff; color:var(--navy); border:1.5px solid var(--line); }
@@ -215,7 +231,7 @@
   .modal-box{
     background:#fff; border-radius:18px; padding:32px 28px; max-width:400px; width:100%;
     position:relative; text-align:center; box-shadow:0 20px 60px rgba(15,22,40,0.35);
-    animation:modal-pop .2s ease;
+    animation:modal-pop .2s ease; max-height:90vh; overflow-y:auto;
   }
   @keyframes modal-pop{
     from{ transform:scale(0.94); opacity:0; }
@@ -231,15 +247,22 @@
     letter-spacing:0.5px; padding:5px 12px; border-radius:100px; margin-bottom:14px;
   }
   .modal-box h3{ font-size:22px; margin-bottom:12px; color:var(--navy); }
-  .modal-box p{ font-size:14px; color:var(--muted); line-height:1.5; margin-bottom:20px; }
+  .modal-box p{ font-size:14px; color:var(--muted); line-height:1.5; margin-bottom:18px; }
+  .modal-bonus-list{
+    list-style:none; text-align:left; background:var(--bg-soft); border-radius:12px;
+    padding:14px 16px; margin-bottom:20px; display:flex; flex-direction:column; gap:9px;
+  }
+  .modal-bonus-list li{ display:flex; gap:9px; align-items:center; font-size:13px; color:var(--navy); font-weight:600; }
   .modal-price-row{ display:flex; align-items:baseline; justify-content:center; gap:10px; margin-bottom:20px; }
   .modal-old{ text-decoration:line-through; color:#9AA3AF; font-size:14px; }
   .modal-price{ font-family:'Fraunces',serif; font-weight:700; font-size:32px; color:var(--green); }
   .modal-price span{ font-size:16px; font-weight:600; }
-  .modal-cta-upgrade{ width:100%; margin-bottom:12px; justify-content:center; }
+  .modal-cta-upgrade{
+    width:100%; margin-bottom:12px; justify-content:center; text-decoration:none; box-sizing:border-box;
+  }
   .modal-cta-decline{
     background:none; border:none; color:var(--muted); font-size:13px; text-decoration:underline;
-    cursor:pointer; font-family:'Public Sans',sans-serif;
+    cursor:pointer; font-family:'Public Sans',sans-serif; display:inline-block;
   }
   .modal-cta-decline:hover{ color:var(--navy); }
 
@@ -394,14 +417,17 @@
 
     <div class="pricing-grid">
       <div class="price-card">
+        <div class="plan-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4z" stroke="#16264A" stroke-width="1.6"/><path d="M4 9h16M9 4v16" stroke="#16264A" stroke-width="1.6"/></svg>
+        </div>
         <div class="plan-name">Plano Básico</div>
         <div class="plan-desc">Só as atividades, sem os bônus.</div>
         <ul class="plan-list">
-          <li>✓ 300 Atividades Visuais de Ciências</li>
-          <li>✓ PDF pronto pra imprimir</li>
-          <li>✓ Organizado do 1º ao 9º ano</li>
-          <li>✓ Garantia de 7 dias</li>
-          <li>✗ Sem os 4 bônus exclusivos</li>
+          <li><svg class="plan-check" width="16" height="16" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#2E8B4F"/><path d="M5 9.2l2.4 2.4L13 6" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> 300 Atividades Visuais de Ciências</li>
+          <li><svg class="plan-check" width="16" height="16" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#2E8B4F"/><path d="M5 9.2l2.4 2.4L13 6" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> PDF pronto pra imprimir</li>
+          <li><svg class="plan-check" width="16" height="16" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#2E8B4F"/><path d="M5 9.2l2.4 2.4L13 6" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> Organizado do 1º ao 9º ano</li>
+          <li><svg class="plan-check" width="16" height="16" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#2E8B4F"/><path d="M5 9.2l2.4 2.4L13 6" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> Garantia de 7 dias</li>
+          <li class="plan-off"><svg class="plan-check" width="16" height="16" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#E4E7EC"/><path d="M6 6l6 6M12 6l-6 6" stroke="#9AA3AF" stroke-width="1.8" stroke-linecap="round"/></svg> Sem os 4 bônus exclusivos</li>
         </ul>
         <div class="plan-price-row">
           <div class="plan-price">R$10<span>,00</span></div>
@@ -411,24 +437,27 @@
 
       <div class="price-card featured">
         <span class="featured-badge">🏆 MAIS ESCOLHIDO</span>
+        <div class="plan-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z" stroke="#2E8B4F" stroke-width="1.5" fill="#2E8B4F" fill-opacity="0.15"/></svg>
+        </div>
         <div class="plan-name">Plano Premium</div>
         <div class="plan-desc">Atividades + os 4 bônus exclusivos.</div>
         <ul class="plan-list">
-          <li>✓ 300 Atividades Visuais de Ciências</li>
-          <li>✓ Organizado do 1º ao 9º ano</li>
-          <li>✓ Planner de Aulas de Ciências</li>
-          <li>✓ Mapas Mentais de Ciências</li>
-          <li>✓ Mini Simulados de Ciências</li>
-          <li>✓ Kit de Experimentos Simples</li>
-          <li class="plan-highlight">✓ Tudo isso por menos de R$1 por semana</li>
-          <li>✓ Garantia de 7 dias</li>
+          <li><svg class="plan-check" width="16" height="16" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#2E8B4F"/><path d="M5 9.2l2.4 2.4L13 6" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> 300 Atividades Visuais de Ciências</li>
+          <li><svg class="plan-check" width="16" height="16" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#2E8B4F"/><path d="M5 9.2l2.4 2.4L13 6" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> Organizado do 1º ao 9º ano</li>
+          <li><svg class="plan-check" width="16" height="16" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#2E8B4F"/><path d="M5 9.2l2.4 2.4L13 6" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> Planner de Aulas de Ciências</li>
+          <li><svg class="plan-check" width="16" height="16" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#2E8B4F"/><path d="M5 9.2l2.4 2.4L13 6" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> Mapas Mentais de Ciências</li>
+          <li><svg class="plan-check" width="16" height="16" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#2E8B4F"/><path d="M5 9.2l2.4 2.4L13 6" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> Mini Simulados de Ciências</li>
+          <li><svg class="plan-check" width="16" height="16" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#2E8B4F"/><path d="M5 9.2l2.4 2.4L13 6" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> Kit de Experimentos Simples</li>
+          <li class="plan-highlight"><svg class="plan-check" width="16" height="16" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#2E8B4F"/><path d="M5 9.2l2.4 2.4L13 6" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> Tudo isso por menos de R$1 por semana</li>
+          <li><svg class="plan-check" width="16" height="16" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#2E8B4F"/><path d="M5 9.2l2.4 2.4L13 6" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> Garantia de 7 dias</li>
         </ul>
         <div class="plan-price-row">
           <div class="plan-old">de R$97,00</div>
           <div class="plan-price">R$29<span>,90</span></div>
         </div>
         <span class="plan-savings">Você economiza R$67,10</span>
-        <button class="plan-cta">QUERO O PLANO PREMIUM →</button>
+        <a class="plan-cta" href="https://pay.wiapy.com/4hHZtDkIcwjZ/" target="_blank" rel="noopener noreferrer">QUERO O PLANO PREMIUM →</a>
         <p class="plan-trust">🔒 Pagamento único · Acesso imediato por e-mail</p>
       </div>
     </div>
@@ -443,13 +472,19 @@
     <button class="modal-close" onclick="closeUpsellModal()" aria-label="Fechar">&times;</button>
     <div class="modal-badge">OFERTA ÚNICA · SÓ AGORA</div>
     <h3>Espera! Antes de continuar…</h3>
-    <p>Por muito pouco a mais, você libera o <b>Plano Premium completo</b> — com planner, mapas mentais, mini simulados e o kit de experimentos.</p>
+    <p>Por muito pouco a mais, você libera o <b>Plano Premium completo</b>, com estes 4 bônus:</p>
+    <ul class="modal-bonus-list">
+      <li><svg width="16" height="16" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#2E8B4F"/><path d="M5 9.2l2.4 2.4L13 6" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> Planner de Aulas de Ciências</li>
+      <li><svg width="16" height="16" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#2E8B4F"/><path d="M5 9.2l2.4 2.4L13 6" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> Mapas Mentais de Ciências</li>
+      <li><svg width="16" height="16" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#2E8B4F"/><path d="M5 9.2l2.4 2.4L13 6" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> Mini Simulados de Ciências</li>
+      <li><svg width="16" height="16" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#2E8B4F"/><path d="M5 9.2l2.4 2.4L13 6" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> Kit de Experimentos Simples</li>
+    </ul>
     <div class="modal-price-row">
       <span class="modal-old">De R$29,90</span>
       <span class="modal-price">R$17<span>,90</span></span>
     </div>
-    <button class="cta-primary modal-cta-upgrade" onclick="closeUpsellModal()">QUERO O PREMIUM POR R$17,90</button>
-    <button class="modal-cta-decline" onclick="closeUpsellModal()">Não, quero só o Básico por R$10,00</button>
+    <a class="cta-primary modal-cta-upgrade" href="https://pay.wiapy.com/m6Gz77Ohpm9K/" target="_blank" rel="noopener noreferrer" onclick="closeUpsellModal()">QUERO O PREMIUM POR R$17,90</a>
+    <a class="modal-cta-decline" href="https://pay.wiapy.com/Oc5h_413Q1pL/" target="_blank" rel="noopener noreferrer" onclick="closeUpsellModal()">Não, quero só o Básico por R$10,00</a>
   </div>
 </div>
 
